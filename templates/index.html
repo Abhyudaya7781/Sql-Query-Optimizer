@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SQL Query Optimizer</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🚀 SQL Query Optimizer</h1>
+            <p>Analyze, Optimize, and Understand Your SQL Queries</p>
+        </header>
+
+        <div class="main-content">
+            <!-- Input Section -->
+            <div class="card">
+                <h2>Query Input</h2>
+                
+                <div class="form-group">
+                    <label for="dialect">SQL Dialect</label>
+                    <select id="dialect">
+                        <option value="PostgreSQL">PostgreSQL</option>
+                        <option value="MySQL">MySQL</option>
+                        <option value="SQLite">SQLite</option>
+                        <option value="SQL Server">SQL Server</option>
+                        <option value="Oracle">Oracle</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="schema">Schema Info (Optional)</label>
+                    <textarea id="schema" rows="3" placeholder="Tables: users(id, name, email), orders(id, user_id, total)"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="query">SQL Query</label>
+                    <textarea id="query" rows="8" placeholder="SELECT * FROM users WHERE id = 1"></textarea>
+                </div>
+
+                <div class="button-group">
+                    <button id="analyzeBtn" class="btn btn-primary">Analyze Query</button>
+                    <button id="clearBtn" class="btn btn-secondary">Clear</button>
+                </div>
+            </div>
+
+            <!-- Analysis Results -->
+            <div id="analysisSection" class="card hidden">
+                <h2>📊 Analysis Results</h2>
+                <div id="analysisContent"></div>
+                <button id="optimizeBtn" class="btn btn-success">Generate Optimizations</button>
+            </div>
+
+            <!-- Optimization Results -->
+            <div id="optimizationSection" class="card hidden">
+                <h2>⚡ Optimized Queries</h2>
+                <div id="optimizationContent"></div>
+            </div>
+
+            <!-- Explanation Section -->
+            <div id="explanationSection" class="card hidden">
+                <h2>📖 Explanation</h2>
+                <div id="explanationContent"></div>
+            </div>
+        </div>
+
+        <div id="loading" class="loading hidden">
+            <div class="spinner"></div>
+            <p>Processing your query...</p>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>
