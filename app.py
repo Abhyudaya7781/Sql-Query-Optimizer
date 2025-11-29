@@ -7,7 +7,7 @@ from groq import Groq
 load_dotenv()
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = 'your-secret-key-here'
+# app.config['SECRET_KEY'] = 'your-secret-key-here'
 
 # Initialize Groq client
 groq_client = Groq(api_key=os.getenv('GROQ_API_KEY'))
@@ -43,7 +43,7 @@ def call_groq(system_prompt, user_prompt, response_format="json"):
                 {"role": "system", "content": system_prompt},
                 {"role": "user", "content": user_prompt}
             ],
-            temperature=0.3,
+            temperature=0.1,
             max_tokens=4000
         )
         
