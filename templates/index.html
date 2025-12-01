@@ -3,71 +3,201 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SQL Query Optimizer</title>
+    <title>SQL Complete Platform - Advanced</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
     <div class="container">
         <header>
-            <h1>🚀 SQL Query Optimizer</h1>
-            <p>Analyze, Optimize, and Understand Your SQL Queries</p>
+            <div class="header-content">
+                <h1>🚀 SQL Complete Platform</h1>
+                <p>Compile · Optimize · Practice · Master SQL</p>
+            </div>
         </header>
 
-        <div class="main-content">
-            <!-- Input Section -->
-            <div class="card">
-                <h2>Query Input</h2>
-                
-                <div class="form-group">
-                    <label for="dialect">SQL Dialect</label>
-                    <select id="dialect">
-                        <option value="PostgreSQL">PostgreSQL</option>
-                        <option value="MySQL">MySQL</option>
-                        <option value="SQLite">SQLite</option>
-                        <option value="SQL Server">SQL Server</option>
-                        <option value="Oracle">Oracle</option>
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <label for="schema">Schema Info (Optional)</label>
-                    <textarea id="schema" rows="3" placeholder="Tables: users(id, name, email), orders(id, user_id, total)"></textarea>
-                </div>
-
-                <div class="form-group">
-                    <label for="query">SQL Query</label>
-                    <textarea id="query" rows="8" placeholder="SELECT * FROM users WHERE id = 1"></textarea>
-                </div>
-
-                <div class="button-group">
-                    <button id="analyzeBtn" class="btn btn-primary">Analyze Query</button>
-                    <button id="clearBtn" class="btn btn-secondary">Clear</button>
-                </div>
-            </div>
-
-            <!-- Analysis Results -->
-            <div id="analysisSection" class="card hidden">
-                <h2>📊 Analysis Results</h2>
-                <div id="analysisContent"></div>
-                <button id="optimizeBtn" class="btn btn-success">Generate Optimizations</button>
-            </div>
-
-            <!-- Optimization Results -->
-            <div id="optimizationSection" class="card hidden">
-                <h2>⚡ Optimized Queries</h2>
-                <div id="optimizationContent"></div>
-            </div>
-
-            <!-- Explanation Section -->
-            <div id="explanationSection" class="card hidden">
-                <h2>📖 Explanation</h2>
-                <div id="explanationContent"></div>
-            </div>
+        <!-- Advanced Tab Navigation -->
+        <div class="tab-navigation">
+            <button class="tab-btn active" data-tab="compiler">
+                <span class="tab-icon">💻</span>
+                <span class="tab-label">SQL Compiler</span>
+            </button>
+            <button class="tab-btn" data-tab="optimizer">
+                <span class="tab-icon">⚡</span>
+                <span class="tab-label">Query Optimizer</span>
+            </button>
+            <button class="tab-btn" data-tab="practice">
+                <span class="tab-icon">📚</span>
+                <span class="tab-label">Practice (20 Questions)</span>
+            </button>
         </div>
 
+        <div class="main-content">
+            
+            <!-- ========== SQL COMPILER TAB ========== -->
+            <div id="compiler-tab" class="tab-content active">
+                <div class="compiler-layout">
+                    <!-- Left Panel: Schema & Query Editor -->
+                    <div class="compiler-editor-panel">
+                        <div class="card editor-card">
+                            <div class="card-header">
+                                <h2>📝 Database Schema</h2>
+                                <button class="btn btn-small btn-secondary" onclick="loadSampleSchema()">
+                                    Load Sample
+                                </button>
+                            </div>
+                            <div class="editor-wrapper">
+                                <textarea id="compilerSchema" class="code-editor" rows="12" placeholder="-- Create your database schema
+CREATE TABLE users (
+    id INTEGER PRIMARY KEY,
+    name TEXT NOT NULL,
+    email TEXT UNIQUE,
+    age INTEGER
+);
+
+-- Insert sample data
+INSERT INTO users VALUES (1, 'John Doe', 'john@example.com', 30);
+INSERT INTO users VALUES (2, 'Jane Smith', 'jane@example.com', 25);
+INSERT INTO users VALUES (3, 'Bob Johnson', 'bob@example.com', 35);"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="card editor-card">
+                            <div class="card-header">
+                                <h2>🔍 SQL Query</h2>
+                                <div class="header-actions">
+                                    <button class="btn btn-small btn-success" id="executeCompilerBtn">
+                                        ▶️ Execute
+                                    </button>
+                                    <button class="btn btn-small btn-secondary" id="clearCompilerBtn">
+                                        🗑️ Clear
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="editor-wrapper">
+                                <textarea id="compilerQuery" class="code-editor" rows="6" placeholder="-- Write your SQL query
+SELECT * FROM users WHERE age > 25;"></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right Panel: Results & Tables -->
+                    <div class="compiler-results-panel">
+                        <!-- Query Results -->
+                        <div id="compilerResults" class="card results-card hidden">
+                            <div class="card-header">
+                                <h2>✅ Query Results</h2>
+                            </div>
+                            <div id="compilerResultsContent" class="results-content"></div>
+                        </div>
+
+                        <!-- Database Tables View -->
+                        <div id="compilerTables" class="card tables-card hidden">
+                            <div class="card-header">
+                                <h2>📋 All Database Tables</h2>
+                            </div>
+                            <div id="compilerTablesContent" class="tables-content"></div>
+                        </div>
+
+                        <!-- Placeholder when no results -->
+                        <div id="compilerPlaceholder" class="placeholder-card">
+                            <div class="placeholder-icon">💻</div>
+                            <h3>Ready to Execute</h3>
+                            <p>Write your schema and query, then click Execute to see results</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ========== QUERY OPTIMIZER TAB ========== -->
+            <div id="optimizer-tab" class="tab-content">
+                <div class="card">
+                    <div class="card-header">
+                        <h2>⚡ Query Optimizer</h2>
+                    </div>
+                    <p class="info-text">
+                        Paste any SQL query and get AI-powered analysis, optimization suggestions, and detailed explanations
+                    </p>
+
+                    <div class="form-group">
+                        <label for="dialect">SQL Dialect</label>
+                        <select id="dialect" class="form-select">
+                            <option value="SQLite">SQLite</option>
+                            <option value="PostgreSQL">PostgreSQL</option>
+                            <option value="MySQL">MySQL</option>
+                            <option value="SQL Server">SQL Server</option>
+                            <option value="Oracle">Oracle</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="optimizerQuery">SQL Query to Optimize</label>
+                        <textarea id="optimizerQuery" class="code-editor" rows="8" placeholder="-- Paste your SQL query here
+SELECT * FROM users WHERE email LIKE '%@gmail.com' ORDER BY created_at;"></textarea>
+                    </div>
+
+                    <div class="button-group">
+                        <button id="analyzeBtn" class="btn btn-primary">🔍 Analyze Query</button>
+                        <button id="clearOptimizerBtn" class="btn btn-secondary">Clear</button>
+                    </div>
+                </div>
+
+                <!-- Analysis Results -->
+                <div id="analysisSection" class="card hidden">
+                    <div class="card-header">
+                        <h2>📊 Analysis Results</h2>
+                    </div>
+                    <div id="analysisContent"></div>
+                    <button id="optimizeBtn" class="btn btn-success">✨ Generate Optimization</button>
+                </div>
+
+                <!-- Optimization Results -->
+                <div id="optimizationSection" class="card hidden">
+                    <div class="card-header">
+                        <h2>⚡ Optimized Query</h2>
+                    </div>
+                    <div id="optimizationContent"></div>
+                </div>
+
+                <!-- Explanation -->
+                <div id="explanationSection" class="card hidden">
+                    <div class="card-header">
+                        <h2>📖 Detailed Explanation</h2>
+                    </div>
+                    <div id="explanationContent"></div>
+                </div>
+            </div>
+
+            <!-- ========== PRACTICE QUESTIONS TAB ========== -->
+            <div id="practice-tab" class="tab-content">
+                <div class="card">
+                    <div class="card-header">
+                        <h2>📚 SQL Practice Questions</h2>
+                    </div>
+                    <p class="info-text">
+                        Solve 20 real SQL interview questions. View tables with actual data, run queries, and check solutions!
+                    </p>
+
+                    <div class="filter-section">
+                        <div class="button-group">
+                            <button class="filter-btn active" data-difficulty="all">All Questions</button>
+                            <button class="filter-btn" data-difficulty="Easy">Easy</button>
+                            <button class="filter-btn" data-difficulty="Medium">Medium</button>
+                            <button class="filter-btn" data-difficulty="Hard">Hard</button>
+                        </div>
+                    </div>
+
+                    <div id="questionsContainer"></div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Loading Overlay -->
         <div id="loading" class="loading hidden">
-            <div class="spinner"></div>
-            <p>Processing your query...</p>
+            <div class="loading-content">
+                <div class="spinner"></div>
+                <p>Processing your request...</p>
+            </div>
         </div>
     </div>
 
