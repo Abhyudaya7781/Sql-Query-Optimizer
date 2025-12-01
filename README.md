@@ -301,29 +301,6 @@ instance/
 .webassets-cache
 ```
 
-## Performance Tips 💡
-
-1. **Compiler**: Runs queries in-memory for speed
-2. **Optimizer**: Uses efficient Groq API (fast responses)
-3. **Practice**: Questions load once and cache locally
-
-## Learning Path Recommendation 🎯
-
-**Complete Beginner:**
-1. Start with "Learn SQL" tab → Introduction module
-2. Complete all beginner lessons (3 lessons)
-3. Move to "Practice Questions" → Easy questions
-4. Try "SQL Compiler" to experiment
-
-**Intermediate:**
-1. "Learn SQL" → Intermediate modules
-2. "Practice Questions" → Medium questions
-3. Use "Query Optimizer" to improve your queries
-
-**Advanced:**
-1. "Learn SQL" → Advanced modules
-2. "Practice Questions" → Hard questions
-3. Experiment with window functions and CTEs
 
 
 ## Browser Compatibility 🌐
